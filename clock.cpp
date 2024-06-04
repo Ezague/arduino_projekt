@@ -14,14 +14,21 @@ Locale locales[] = {
     {
         {"Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"},
         "DD.MM.YYYY"
-        },
+    },
     {
         {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"},
         "MM/DD/YYYY"
-        },
+    },
+};
+
+const char *timeZones[] = {
+    "DK", // Central European Time
+    "US"  // Greenwich Mean Time
 };
 
 int currentLocale = 0; // Default locale
+bool use12HourFormat = false; // Default to 12-hour format
+int currentTimeZone = 0; // Default time zone
 
 void setupRTC() {
 #ifndef ESP8266
@@ -54,6 +61,9 @@ void loopRTC() {
 
             if (buttonState == HIGH) {
                 currentLocale = (currentLocale + 1) % (sizeof(locales) / sizeof(locales[0]));
+                use12HourFormat = !use12HourFormat; // Toggle between 12-hour and 24-hour formats
+                // Toggle between time zones
+                currentTimeZone = (currentTimeZone + 1) % (sizeof(timeZones) / sizeof(timeZones[0]));
 
                 // Update display immediately after changing the format
                 DateTime now = rtc.now();
@@ -67,6 +77,11 @@ void loopRTC() {
                 display.setTextSize(1); // Normal 1:1 pixel scale
                 display.setCursor(0, 30);
                 printDate(now);
+
+                display.setTextSize(1); // Normal 1:1 pixel scale
+                display.setCursor(0, 50);
+                display.print("Format: ");
+                display.println(timeZones[currentTimeZone]);
 
                 display.display();
             }
@@ -92,10 +107,14 @@ void loopRTC() {
         display.setCursor(0, 30);
         printDate(now);
 
+        display.setTextSize(1); // Normal 1:1 pixel scale
+        display.setCursor(0, 50);
+        display.print("Format: ");
+        display.println(timeZones[currentTimeZone]);
+
         display.display();
     }
 }
-
 
 void printDigits(int digits) {
     // Utility function for digital clock display: prints preceding colon and leading 0
@@ -105,11 +124,20 @@ void printDigits(int digits) {
 }
 
 void printTime(const DateTime& now) {
-    printDigits(now.hour());
+    if (use12HourFormat) {
+        int hour = now.hour() % 12;
+        if (hour == 0) hour = 12; // Convert 0 to 12 for 12-hour format
+        printDigits(hour);
+    } else {
+        printDigits(now.hour());
+    }
     display.print(":");
     printDigits(now.minute());
     display.print(":");
     printDigits(now.second());
+    if (use12HourFormat) {
+        display.print(now.hour() < 12 ? "AM" : "PM");
+    }
     display.println();
 }
 
