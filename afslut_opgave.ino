@@ -1,31 +1,32 @@
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
+#include <Arduino.h>
 #include <Adafruit_SSD1306.h>
-#include <RTClib.h>
+#include "Menu.h"
 #include "Clock.h"
+#include <Wire.h>
 
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
-#define OLED_RESET 4 // Reset pin # (or -1 if sharing Arduino reset pin)
-#define I2C_ADDRESS 0x3C // I2C address for the OLED display
-#define DELAY 2000 // Update interval in milliseconds
+#define I2C_ADDRESS 0x3C
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
-void setup() {
-    Serial.begin(57600);
-    setupRTC();
-
-    if (!display.begin(SSD1306_SWITCHCAPVCC, I2C_ADDRESS)) { // Correct I2C Address for 128x64
+void setup()
+{
+  Serial.begin(57600);
+  //setupRTC();
+  setupEncoder();
+  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+  if (!display.begin(SSD1306_SWITCHCAPVCC, I2C_ADDRESS)) { // Correct I2C Address for 128x64
         Serial.println(F("SSD1306 allocation failed"));
         for (;;); // Don't proceed, loop forever
     }
 
-    display.clearDisplay();
-    display.display();
+  display.clearDisplay();
+  display.display();
 }
 
-void loop() {
-    loopRTC();
+void loop()
+{
+  // menu for selecting the different functions with rotary encoder
+  //loopRTC();
+  loopEncoder();
+  display.clearDisplay();
 }

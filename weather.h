@@ -1,9 +1,7 @@
-#ifndef CLOCK_H_
-#define CLOCK_H_
+#ifndef WEATHER_H_
+#define WEATHER_H_
 
 #include <Adafruit_SSD1306.h>
-#include <Wire.h>
-#include <RTClib.h>
 #include "Menu.h"
 
 // Extern Vars
@@ -14,11 +12,11 @@ extern int lastButtonState;
 extern unsigned long lastDebounceTime;
 extern unsigned long debounceDelay;
 
-void setupRTC();
-void printDigits(int digits);
-void printTime(const DateTime& now);
-void printDate(const DateTime& now);
-void loopRTC();
-void updateDisplay(const DateTime& now);
+void setupDHT();
+void loopDHT();
+void updateDisplay();
+void updateTemperatureDisplay();
+void updateHumidityDisplay();
+void updateSensorData();
 
 #endif

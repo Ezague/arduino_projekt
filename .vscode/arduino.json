@@ -1,0 +1,6 @@
+{
+    "board": "arduino:samd:arduino_zero_edbg",
+    "port": "/dev/tty.usbmodem12102",
+    "programmer": "atmel_ice",
+    "sketch": "afslut_opgave.ino"
+}
