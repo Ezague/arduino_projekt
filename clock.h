@@ -19,6 +19,5 @@ void printDigits(int digits);
 void printTime(const DateTime& now);
 void printDate(const DateTime& now);
 void loopRTC();
-void updateDisplay(const DateTime& now);
 
 #endif

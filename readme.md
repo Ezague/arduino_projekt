@@ -6,9 +6,10 @@
 3. [Board layout](#board-layout)
 4. [Software](#software)
 5. [Installation](#installation)
-6. [Usage](#usage)
-7. [Author](#author)
-7. [License](#license)
+6. [Dependencies](#dependencies)
+7. [Usage](#usage)
+8. [Author](#author)
+9. [License](#license)
 
 ### Introduction
 * This is a simple Arduino menu for the 128x64 OLED display with the SSD1306 driver. The menu is controlled with a rotary encoder with push button. The menu is drawn with the Adafruit GFX library and the Adafruit SSD1306 library.
@@ -43,6 +44,12 @@
 
 ### Installation
 * To install the software, download the files and open `afslut_opgave.ino` in the Arduino IDE or your preferred editor. Then upload the code to the Arduino Zero.
+
+### Dependencies
+* The following libraries are required to run the software:
+  * Adafruit SSD1306 library (Used for the OLED display)
+  * DHT sensor library (Used for the DHT11 temperature and humidity sensor)
+  * Encoder library (Used for the rotary encoder)
 
 ### Usage
 * The menu is controlled with the rotary encoder. The push button is used to select an item in the menu. The menu items are:
