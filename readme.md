@@ -50,6 +50,7 @@
   * Adafruit SSD1306 library (Used for the OLED display)
   * DHT sensor library (Used for the DHT11 temperature and humidity sensor)
   * Encoder library (Used for the rotary encoder)
+  * RTC library (Used for the real-time clock)
 
 ### Usage
 * The menu is controlled with the rotary encoder. The push button is used to select an item in the menu. The menu items are:
