@@ -54,8 +54,8 @@
 
 ### Usage
 * The menu is controlled with the rotary encoder. The push button is used to select an item in the menu. The menu items are:
-  * Clock
-  * Weather
+  * Clock (Can be set to 12 or 24 hour format)
+  * Weather (Displays the current temperature and humidity)
 
 * The clock displays the current time and date. The weather displays the current temperature and humidity.
 

@@ -27,7 +27,7 @@ const char *timeZones[] = {
 };
 
 int currentLocale = 0; // Default locale
-bool use12HourFormat = false; // Default to 12-hour format
+bool use12HourFormat = false; // Default to 24-hour format
 int currentTimeZone = 0; // Default time zone
 
 void setupRTC() {
